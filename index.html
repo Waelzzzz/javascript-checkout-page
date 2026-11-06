@@ -1,0 +1,103 @@
+<!DOCTYPE html> <!-- Tells the browser to use modern HTML rules. -->
+<html lang="en"> <!-- Starts the HTML page and sets its language to English. -->
+<head> <!-- Starts the page settings. -->
+  <meta charset="UTF-8"> <!-- Helps the browser display letters and symbols correctly. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sets the layout width and starting zoom on phones. -->
+  <title>Checkout</title> <!-- Shows Checkout in the browser tab. -->
+  <link rel="stylesheet" href="style.css"> <!-- Loads the CSS file from the same folder. -->
+  <script src="index.js" defer></script>
+</head> <!-- Ends the page settings. -->
+
+<body> <!-- Starts the page content. -->
+  <main> <!-- Holds the main checkout content. -->
+    <h1>Checkout</h1> <!-- Shows the main heading above both columns. -->
+
+    <div class="checkout-layout"> <!-- CSS uses this class to arrange the form and summary. -->
+      <form id="checkout-form"> <!-- Holds the customer inputs and the Place Order button. -->
+        <section> <!-- Groups the customer details inside the form. -->
+          <h2>Customer Details</h2> <!-- Shows the heading for this section. -->
+
+          <label for="full-name">Full Name</label> <!-- Connects to the input with id="full-name". -->
+          <input type="text" id="full-name" name="fullName" required> <!-- Collects the customer's name and requires a value. -->
+
+          <label for="email">Email</label> <!-- Connects to the input with id="email". -->
+          <input type="email" id="email" name="email" required> <!-- Requires an email and checks its basic format. -->
+
+          <label for="phone">Phone Number</label> <!-- Connects to the input with id="phone". -->
+          <input type="tel" id="phone" name="phone" required> <!-- Requires a phone number and brings up a phone keypad on mobile. -->
+
+          <label for="address">Delivery Address</label> <!-- Connects to the textarea with id="address". -->
+          <textarea id="address" name="address" required></textarea> <!-- Gives the customer a larger box for their address. -->
+        </section> <!-- Ends Customer Details. -->
+
+       <fieldset> <!-- Groups the delivery options. -->
+  <legend>Delivery Method</legend> <!-- Shows the group title. -->
+
+  <label> <!-- Makes Standard and its text clickable together. -->
+    <input type="radio" id="standard" name="delivery" value="standard" checked> <!-- Selects Standard by default. -->
+    Standard Delivery ($5)
+  </label>
+
+  <label> <!-- Makes Express and its text clickable together. -->
+    <input type="radio" id="express" name="delivery" value="express"> <!-- ID lets JavaScript find Express. -->
+    Express Delivery ($10)
+  </label>
+</fieldset>
+
+        <fieldset> <!-- Groups the payment options. -->
+  <legend>Payment Method</legend>
+
+  <label>
+    <input type="radio" id="cash" name="payment" value="cash" checked> <!-- JavaScript finds Cash using this ID. -->
+    Cash on Delivery
+  </label>
+
+  <label>
+    <input type="radio" id="card" name="payment" value="card"> <!-- JavaScript finds Card using this ID. -->
+    Credit or Debit Card
+  </label>
+</fieldset>
+
+        <fieldset id="card-details" hidden disabled> <!-- Starts hidden and skips validation until JavaScript enables it. -->
+          <legend>Card Details</legend> <!-- Shows the title when this group becomes visible. -->
+
+          <label for="card-number">Card Number</label> <!-- Connects to the card number input. -->
+          <input type="text" id="card-number" placeholder="16"  maxlength="16"  inputmode="numeric" required> <!-- Asks mobile devices to show a number keypad. -->
+
+          <label for="expiry">Expiry Date</label> <!-- Connects to the expiry input. -->
+          <input type="text" id="expiry" placeholder="MM/YY"  required> <!-- Shows the expected date format as a hint. -->
+
+          <label for="cvv">CVV</label> <!-- Connects to the CVV input. -->
+          <input type="text" id="cvv" placeholder="567" maxlength="3"  inputmode="numeric" required> <!-- Collects the card security code for the simulation. -->
+        </fieldset> <!-- Ends the card details group. -->
+
+        <button type="submit">Place Order</button> <!-- Tries to submit the form and triggers browser validation. -->
+      </form> <!-- Ends the checkout form. -->
+
+      <section id="order-summary"> <!-- Starts the summary next to the form in the desktop layout. -->
+        <h2>Order Summary</h2> <!-- Shows the summary heading. -->
+
+        <ul id="order-items"></ul> <!-- JavaScript will add the products to this empty list. -->
+        <p>Total items: <span id="item-count">0</span></p> <!-- JavaScript will update the quantity shown here. -->
+
+        <label for="promo-code">Promo Code</label> <!-- Connects to the promo code input. -->
+        <input type="text" id="promo-code"> <!-- Lets the customer type a code such as SAVE10. -->
+        <button type="button" id="apply-promo">Apply</button> <!-- JavaScript will check the code when this is clicked. -->
+        <p id="promo-message" aria-live="polite"></p> <!-- Holds promo feedback that screen readers can announce. -->
+
+        <h3>Price Breakdown</h3> <!-- Shows a smaller heading inside Order Summary. -->
+        <p>Subtotal: <span id="subtotal">$0.00</span></p> <!-- Shows the price of the products before delivery and discount. -->
+        <p>Discount: <span id="discount">$0.00</span></p> <!-- Shows how much the promo code saves. -->
+        <p>Delivery: <span id="delivery-fee">$5.00</span></p> <!-- Starts at $5 because Standard is selected. -->
+        <p>Total: <span id="total">$5.00</span></p> <!-- JavaScript will update the final amount. -->
+      </section> <!-- Ends Order Summary. -->
+    </div> <!-- Ends the layout wrapper around the form and summary. -->
+
+    <section id="order-confirmation" hidden> <!-- JavaScript will show this after a successful order. -->
+      <h2>Order Confirmed</h2> <!-- Shows the confirmation heading. -->
+      <p>Order number: <span id="order-number"></span></p> <!-- JavaScript will insert the order number here. -->
+      <div id="confirmation-summary"></div> <!-- JavaScript will add the completed order details here. -->
+    </section> <!-- Ends the confirmation section. -->
+  </main> <!-- Ends the main checkout content. -->
+</body> <!-- Ends the page content. -->
+</html> <!-- Ends the HTML document. -->
